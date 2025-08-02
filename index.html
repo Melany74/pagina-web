@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Compuertas Lógicas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #e0f7f7 0%, #b3e5e0 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #4ecdc4 0%, #26a69a 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        nav {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        main {
+            display: grid;
+            gap: 2rem;
+        }
+
+        section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            color: #26a69a;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #26a69a;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: #00796b;
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1.3rem;
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .theory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .gate-card {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+            color: #ad1457;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .gate-card:hover {
+            transform: scale(1.05);
+        }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .material-item {
+            background: #e0f7f7;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #26a69a;
+            transition: all 0.3s ease;
+        }
+
+        .material-item:hover {
+            background: #ccf2f2;
+            transform: translateX(5px);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #4ecdc4 0%, #26a69a 100%);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s ease;
+        }
+
+        tr:hover td {
+            background-color: #e0f7f7;
+        }
+
+        .simulation-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        iframe {
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            margin: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        iframe:hover {
+            transform: scale(1.02);
+        }
+
+        .analysis-item {
+            background: #e0f7f7;
+            margin: 1rem 0;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 5px solid #26a69a;
+        }
+
+        .analysis-item strong {
+            color: #00796b;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .conclusion-list {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .conclusion-item {
+            background: linear-gradient(135deg, #e1bee7 0%, #ce93d8 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            color: #4a148c;
+        }
+
+        .conclusion-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #4ecdc4 0%, #26a69a 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 1rem;
+            }
+            
+            iframe {
+                width: 100%;
+                height: 300px;
+            }
+        }
+
+        .print-styles {
+            display: none;
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .back-to-top,
+            nav {
+                display: none;
+            }
+            
+            section {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Análisis de Compuertas Lógicas</h1>
+            <nav>
+                <a href="segundoDeber.html">Segundo Deber</a>
+                <a href="tercerDeber.html">Tercer Deber</a>
+            </nav>
+        </header>
+
+        <main>
+            <section>
+                <h2>Título de la Práctica</h2>
+                <p><strong>"Análisis y Simulación de Compuertas Lógicas Básicas (AND, OR y NOT)"</strong></p>
+            </section>
+
+            <section>
+                <h2>Objetivos</h2>
+                <h3>Objetivo General</h3>
+                <p>Analizar el comportamiento de las compuertas lógicas básicas mediante su construcción y simulación.</p>
+
+                <h3>Objetivos Específicos</h3>
+                <ul>
+                    <li>Identificar las diferentes compuertas lógicas y sus símbolos.</li>
+                    <li>Construir circuitos lógicos básicos utilizando compuertas.</li>
+                    <li>Verificar las tablas de verdad mediante simulación y práctica.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Marco Teórico</h2>
+                <div class="theory-grid">
+                    <div class="gate-card">
+                        <h3>Compuerta AND</h3>
+                        <p>Solo da salida alta cuando todas las entradas son altas.</p>
+                    </div>
+                    <div class="gate-card">
+                        <h3>Compuerta OR</h3>
+                        <p>Da salida alta si al menos una entrada es alta.</p>
+                    </div>
+                    <div class="gate-card">
+                        <h3>Compuerta NOT</h3>
+                        <p>Invierte la entrada (inversor).</p>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
+                    <figure style="text-align: center;">
+                        <div style="width: 150px; height: 100px; background: #f0f0f0; border: 2px solid #333; margin: 0 auto; display: flex; align-items: center; justify-content: center; border-radius: 5px;">
+                            <span>AND Gate</span>
+                        </div>
+                        <figcaption style="margin-top: 0.5rem; font-style: italic;">Símbolo de compuerta AND</figcaption>
+                    </figure>
+                    <figure style="text-align: center;">
+                        <div style="width: 150px; height: 100px; background: #f0f0f0; border: 2px solid #333; margin: 0 auto; display: flex; align-items: center; justify-content: center; border-radius: 5px;">
+                            <span>OR Gate</span>
+                        </div>
+                        <figcaption style="margin-top: 0.5rem; font-style: italic;">Símbolo de compuerta OR</figcaption>
+                    </figure>
+                    <figure style="text-align: center;">
+                        <div style="width: 150px; height: 100px; background: #f0f0f0; border: 2px solid #333; margin: 0 auto; display: flex; align-items: center; justify-content: center; border-radius: 5px;">
+                            <span>NOT Gate</span>
+                        </div>
+                        <figcaption style="margin-top: 0.5rem; font-style: italic;">Símbolo de compuerta NOT</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section>
+                <h2>Materiales y Equipos</h2>
+                <div class="materials-grid">
+                    <div class="material-item">Fuente de alimentación</div>
+                    <div class="material-item">Protoboard</div>
+                    <div class="material-item">Cables de conexión</div>
+                    <div class="material-item">LEDs</div>
+                    <div class="material-item">Resistencias</div>
+                    <div class="material-item">Chips lógicos (74LS08, 74LS32, 74LS04)</div>
+                    <div class="material-item">Multímetro (opcional)</div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Procedimiento</h2>
+                <ol>
+                    <li><strong>Preparación:</strong> Conectar la compuerta lógica en el protoboard según el circuito.</li>
+                    <li><strong>Alimentación:</strong> Alimentar adecuadamente el chip (Vcc y GND).</li>
+                    <li><strong>Pruebas:</strong> Probar las diferentes combinaciones de entradas y observar la salida.</li>
+                    <li><strong>Registro:</strong> Registrar resultados en la tabla correspondiente.</li>
+                    <li><strong>Simulación:</strong> (Opcional) Simular los mismos circuitos en software.</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Tabla de Resultados</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Entrada A</th>
+                            <th>Entrada B</th>
+                            <th>Salida Esperada</th>
+                            <th>Salida Real</th>
+                            <th>Observaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>Funciona OK</td></tr>
+                        <tr><td>0</td><td>1</td><td>1</td><td>1</td><td>Funciona OK</td></tr>
+                        <tr><td>1</td><td>0</td><td>1</td><td>1</td><td>Funciona OK</td></tr>
+                        <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>Funciona OK</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>Simulación en Tinkercad</h2>
+                <div class="simulation-container">
+                    <iframe width="725" height="453" src="https://www.tinkercad.com/embed/j6n1A0oinfi?editbtn=1" frameborder="0" scrolling="no" title="Simulación 1 - Compuertas Lógicas"></iframe>
+                    <iframe width="725" height="453" src="https://www.tinkercad.com/embed/csdWH2rlKeT?editbtn=1" frameborder="0" scrolling="no" title="Simulación 2 - Compuertas Lógicas"></iframe>
+                </div>
+            </section>
+
+            <section>
+                <h2>Análisis y Discusión</h2>
+                <div class="analysis-item">
+                    <strong>¿Coincidieron los resultados reales con los esperados?</strong>
+                    En la mayoría de los casos, sí coincidieron, siempre que el circuito estuviera armado correctamente y las conexiones fueran apropiadas.
+                </div>
+
+                <div class="analysis-item">
+                    <strong>¿Qué errores se presentaron?</strong>
+                    <ul>
+                        <li>Conexiones incorrectas en la alimentación del chip (Vcc o GND)</li>
+                        <li>Entradas mal conectadas o flotantes</li>
+                        <li>Uso incorrecto de pines del integrado</li>
+                        <li>Cortocircuitos accidentales en la protoboard</li>
+                    </ul>
+                </div>
+
+                <div class="analysis-item">
+                    <strong>¿Qué sucede si no se conecta correctamente la alimentación del chip?</strong>
+                    El chip no funcionará correctamente, generando salidas indefinidas, comportamiento errático o ausencia total de respuesta en las salidas.
+                </div>
+
+                <div class="analysis-item">
+                    <strong>¿Cómo se interpreta una salida incorrecta?</strong>
+                    Se debe revisar sistemáticamente las conexiones, verificar que las entradas estén bien definidas (no flotantes), y confirmar la alimentación correcta del circuito integrado.
+                </div>
+            </section>
+
+            <section>
+                <h2>Conclusiones</h2>
+                <div class="conclusion-list">
+                    <div class="conclusion-item">
+                        <strong>Implementación exitosa:</strong> Las compuertas lógicas básicas pueden implementarse fácilmente con componentes TTL estándar de la serie 74.
+                    </div>
+                    <div class="conclusion-item">
+                        <strong>Verificación teórica:</strong> El comportamiento real de los circuitos coincide perfectamente con las tablas de verdad estudiadas en la teoría.
+                    </div>
+                    <div class="conclusion-item">
+                        <strong>Valor de la simulación:</strong> La simulación digital es una herramienta valiosa que ayuda a verificar los diseños antes de implementarlos físicamente, reduciendo errores y optimizando tiempo.
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Anexos</h2>
+                <div class="materials-grid">
+                    <div class="material-item">Fotos del montaje físico</div>
+                    <div class="material-item">Capturas de pantalla del simulador</div>
+                    <div class="material-item">Tablas de verdad completas</div>
+                    <div class="material-item">Esquemas de conexión detallados</div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <button class="back-to-top" onclick="scrollToTop()" title="Volver arriba">↑</button>
+
+    <script>
+        // Mostrar/ocultar botón de volver arriba
+        window.addEventListener('scroll', function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // Función para volver arriba suavemente
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Efectos de animación al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Aplicar animaciones a las secciones
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+
+            // Animación inicial del header
+            const header = document.querySelector('header');
+            header.style.animation = 'fadeInDown 1s ease-out';
+        });
+
+        // Agregar estilos de animación CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-50px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

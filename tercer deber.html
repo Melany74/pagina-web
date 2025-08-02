@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tercer Deber - Sistemas de Conversión entre Bases</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border: 1px solid #ccc;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            font-size: 18px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+        
+        h3 {
+            color: #34495e;
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            margin: 10px 0;
+            text-align: justify;
+        }
+        
+        .theory-box {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .example {
+            background-color: #e8f4f8;
+            border-left: 3px solid #3498db;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: Courier New, monospace;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #666;
+            padding: 8px;
+            text-align: center;
+        }
+        
+        th {
+            background-color: #34495e;
+            color: white;
+            font-weight: bold;
+        }
+        
+        td {
+            background-color: #f9f9f9;
+        }
+        
+        .base-list {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        
+        .base-list li {
+            margin: 5px 0;
+        }
+        
+        .steps {
+            margin-left: 20px;
+        }
+        
+        .steps li {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TERCER DEBER</h1>
+        <p class="subtitle">SISTEMAS DE CONVERSIÓN ENTRE BASES</p>
+
+        <h2>1. Introducción a los Sistemas Numéricos</h2>
+        <p>Los sistemas de numeración son conjuntos de símbolos y reglas que permiten representar números. Los más utilizados en informática son:</p>
+        
+        <ul class="base-list">
+            <li><strong>Sistema Binario (Base 2):</strong> Utiliza solo los dígitos 0 y 1. Es el sistema utilizado internamente por las computadoras.</li>
+            <li><strong>Sistema Octal (Base 8):</strong> Utiliza los dígitos del 0 al 7. Se usa en programación y sistemas Unix.</li>
+            <li><strong>Sistema Decimal (Base 10):</strong> Utiliza los dígitos del 0 al 9. Es el sistema que usamos normalmente.</li>
+            <li><strong>Sistema Hexadecimal (Base 16):</strong> Utiliza los dígitos 0-9 y las letras A-F. Se usa mucho en programación.</li>
+        </ul>
+
+        <h2>2. Métodos de Conversión</h2>
+
+        <div class="theory-box">
+            <h3>2.1 Conversión de Binario a Decimal</h3>
+            <p>Se multiplica cada dígito por la potencia correspondiente de 2 y se suman todos los resultados.</p>
+            <div class="example">
+                Ejemplo: 1101₂ = 1×2³ + 1×2² + 0×2¹ + 1×2⁰ = 8 + 4 + 0 + 1 = 13₁₀
+            </div>
+        </div>
+
+        <div class="theory-box">
+            <h3>2.2 Conversión de Decimal a Binario</h3>
+            <p>Se divide el número decimal entre 2 sucesivamente y se toman los residuos en orden inverso.</p>
+            <div class="example">
+                Ejemplo: 13₁₀ a binario
+                13 ÷ 2 = 6 residuo 1
+                6 ÷ 2 = 3 residuo 0  
+                3 ÷ 2 = 1 residuo 1
+                1 ÷ 2 = 0 residuo 1
+                Resultado: 1101₂
+            </div>
+        </div>
+
+        <div class="theory-box">
+            <h3>2.3 Conversión de Binario a Octal</h3>
+            <p>Se agrupan los dígitos binarios de 3 en 3 desde la derecha y se convierte cada grupo.</p>
+            <div class="example">
+                Ejemplo: 1101001₂ = 1|101|001 = 1₈5₈1₈ = 151₈
+            </div>
+        </div>
+
+        <div class="theory-box">
+            <h3>2.4 Conversión de Binario a Hexadecimal</h3>
+            <p>Se agrupan los dígitos binarios de 4 en 4 desde la derecha y se convierte cada grupo.</p>
+            <div class="example">
+                Ejemplo: 1101001₂ = 110|1001 = 6₁₆9₁₆ = 69₁₆
+            </div>
+        </div>
+
+        <div class="theory-box">
+            <h3>2.5 Conversión de Octal a Decimal</h3>
+            <p>Se multiplica cada dígito por la potencia correspondiente de 8.</p>
+            <div class="example">
+                Ejemplo: 151₈ = 1×8² + 5×8¹ + 1×8⁰ = 64 + 40 + 1 = 105₁₀
+            </div>
+        </div>
+
+        <div class="theory-box">
+            <h3>2.6 Conversión de Hexadecimal a Decimal</h3>
+            <p>Se multiplica cada dígito por la potencia correspondiente de 16.</p>
+            <div class="example">
+                Ejemplo: 2A5₁₆ = 2×16² + 10×16¹ + 5×16⁰ = 512 + 160 + 5 = 677₁₀
+            </div>
+        </div>
+
+        <h2>3. Tabla de Equivalencias</h2>
+        <p>A continuación se presenta una tabla con ejemplos de conversiones entre los diferentes sistemas:</p>
+
+        <table>
+            <tr>
+                <th>Binario</th>
+                <th>Octal</th>
+                <th>Hexadecimal</th>
+                <th>Decimal</th>
+            </tr>
+            <tr>
+                <td>1101010110</td>
+                <td>1532</td>
+                <td>35A</td>
+                <td>858</td>
+            </tr>
+            <tr>
+                <td>1010101011</td>
+                <td>1253</td>
+                <td>2AB</td>
+                <td>683</td>
+            </tr>
+            <tr>
+                <td>1010100101</td>
+                <td>1245</td>
+                <td>2A5</td>
+                <td>677</td>
+            </tr>
+            <tr>
+                <td>1010010111</td>
+                <td>1227</td>
+                <td>297</td>
+                <td>663</td>
+            </tr>
+            <tr>
+                <td>101111</td>
+                <td>57</td>
+                <td>2F</td>
+                <td>47</td>
+            </tr>
+            <tr>
+                <td>111000</td>
+                <td>70</td>
+                <td>38</td>
+                <td>56</td>
+            </tr>
+            <tr>
+                <td>110000</td>
+                <td>60</td>
+                <td>30</td>
+                <td>48</td>
+            </tr>
+            <tr>
+                <td>110101</td>
+                <td>65</td>
+                <td>35</td>
+                <td>53</td>
+            </tr>
+            <tr>
+                <td>1101001011</td>
+                <td>1513</td>
+                <td>34B</td>
+                <td>843</td>
+            </tr>
+            <tr>
+                <td>1111011</td>
+                <td>175</td>
+                <td>7B</td>
+                <td>123</td>
+            </tr>
+            <tr>
+                <td>10101100</td>
+                <td>534</td>
+                <td>AC</td>
+                <td>172</td>
+            </tr>
+            <tr>
+                <td>10111101</td>
+                <td>575</td>
+                <td>BD</td>
+                <td>189</td>
+            </tr>
+            <tr>
+                <td>1111000</td>
+                <td>170</td>
+                <td>78</td>
+                <td>120</td>
+            </tr>
+            <tr>
+                <td>10000010</td>
+                <td>202</td>
+                <td>82</td>
+                <td>130</td>
+            </tr>
+            <tr>
+                <td>10001100</td>
+                <td>206</td>
+                <td>8C</td>
+                <td>140</td>
+            </tr>
+            <tr>
+                <td>10010110</td>
+                <td>226</td>
+                <td>96</td>
+                <td>150</td>
+            </tr>
+        </table>
+
+        <h2>4. Observaciones Importantes</h2>
+        <ul class="base-list">
+            <li>Para convertir entre bases diferentes, generalmente se usa el sistema decimal como intermediario.</li>
+            <li>Los sistemas binario, octal y hexadecimal están relacionados matemáticamente.</li>
+            <li>En hexadecimal, las letras representan: A=10, B=11, C=12, D=13, E=14, F=15.</li>
+            <li>Es importante verificar los cálculos realizando la conversión inversa.</li>
+        </ul>
+
+        <h2>5. Conclusión</h2>
+        <p>El conocimiento de los sistemas de numeración y sus conversiones es fundamental en el área de la informática y las ciencias de la computación. Estos sistemas permiten representar información de manera eficiente en diferentes contextos tecnológicos.</p>
+    </div>
+</body>
+</html>
