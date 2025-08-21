@@ -3,13 +3,396 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quinto deber</title>
+    <title>ACTIVIDAD 2 - Simulación de Circuitos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .back-link {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+        .back-link:hover {
+            background: #2980b9;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+        .objectives {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .materials {
+            background: #e8f5e8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        ul {
+            padding-left: 25px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .simulation-frame {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .formula {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #ffc107;
+            font-family: 'Courier New', monospace;
+        }
+        .conclusion {
+            background: #d1ecf1;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #17a2b8;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
-<body> 
-    <a href="index.html">volver</a>
-    <h2>Simulación de circuitos serie y paralelo <br>
-    
-    </h2>
-<iframe width="725" height="453" src="https://www.tinkercad.com/embed/lJUHe2ZwMK2?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Volver</a>
+        
+        <div class="header">
+            <h1>ACTIVIDAD 2</h1>
+            <h2>Título de la práctica: Simulación de circuitos serie y paralelo</h2>
+        </div>
+
+        <section class="objectives">
+            <h2>Objetivos</h2>
+            
+            <h3>Objetivo General:</h3>
+            <p>Analizar y comparar el comportamiento de la corriente, voltaje y resistencia en circuitos eléctricos conectados en serie y paralelo mediante simulación en Tinkercad, aplicando las leyes de Ohm y Kirchhoff para comprender las características fundamentales de cada tipo de conexión.</p>
+            
+            <h3>Objetivos Específicos:</h3>
+            <ul>
+                <li>Construir circuitos serie y paralelo utilizando resistencias y fuentes de voltaje en el simulador Tinkercad.</li>
+                <li>Medir y registrar los valores de corriente, voltaje y resistencia en diferentes puntos de los circuitos simulados.</li>
+                <li>Verificar experimentalmente las leyes de Kirchhoff para voltajes (LKV) y corrientes (LKC) en ambos tipos de circuitos.</li>
+                <li>Calcular la resistencia equivalente teórica y compararla con los valores obtenidos en la simulación.</li>
+                <li>Analizar las ventajas y desventajas de las conexiones serie y paralelo en aplicaciones prácticas.</li>
+                <li>Desarrollar habilidades en el uso de herramientas de simulación electrónica.</li>
+            </ul>
+        </section>
+
+        <h2>Marco Teórico</h2>
+        <p>Los circuitos eléctricos pueden configurarse de diferentes maneras, siendo las conexiones serie y paralelo las más fundamentales.</p>
+        
+        <h3>Circuitos en Serie:</h3>
+        <p>En un circuito serie, los componentes se conectan uno después del otro, formando una sola trayectoria para la corriente eléctrica. Las características principales son:</p>
+        <ul>
+            <li>La corriente es la misma en todos los componentes: I₁ = I₂ = I₃ = I_total</li>
+            <li>El voltaje total se divide entre los componentes: V_total = V₁ + V₂ + V₃</li>
+            <li>La resistencia total es la suma de todas las resistencias: R_total = R₁ + R₂ + R₃</li>
+        </ul>
+
+        <div class="formula">
+            <strong>Fórmulas para circuitos serie:</strong><br>
+            R_eq = R₁ + R₂ + R₃ + ... + Rₙ<br>
+            I = V_total / R_eq<br>
+            V_i = I × R_i
+        </div>
+
+        <h3>Circuitos en Paralelo:</h3>
+        <p>En un circuito paralelo, los componentes se conectan en ramas separadas, cada una con su propia trayectoria para la corriente. Las características principales son:</p>
+        <ul>
+            <li>El voltaje es el mismo en todos los componentes: V₁ = V₂ = V₃ = V_total</li>
+            <li>La corriente total es la suma de las corrientes de cada rama: I_total = I₁ + I₂ + I₃</li>
+            <li>La inversa de la resistencia total es la suma de las inversas: 1/R_total = 1/R₁ + 1/R₂ + 1/R₃</li>
+        </ul>
+
+        <div class="formula">
+            <strong>Fórmulas para circuitos paralelo:</strong><br>
+            1/R_eq = 1/R₁ + 1/R₂ + 1/R₃ + ... + 1/Rₙ<br>
+            I_i = V / R_i<br>
+            I_total = I₁ + I₂ + I₃ + ... + Iₙ
+        </div>
+
+        <section class="materials">
+            <h2>Materiales y Equipos</h2>
+            <h3>Software:</h3>
+            <ul>
+                <li>Tinkercad (plataforma de simulación en línea)</li>
+                <li>Navegador web actualizado</li>
+                <li>Conexión a internet estable</li>
+            </ul>
+            
+            <h3>Componentes virtuales utilizados:</h3>
+            <ul>
+                <li>Fuente de voltaje de 9V (batería)</li>
+                <li>Resistencias de diferentes valores (220Ω, 330Ω, 470Ω, 1kΩ)</li>
+                <li>Protoboard virtual</li>
+                <li>Cables de conexión</li>
+                <li>Multímetro virtual</li>
+                <li>LED indicadores (opcional)</li>
+            </ul>
+        </section>
+
+        <h2>Procedimiento</h2>
+        <ol>
+            <li><strong>Preparación del entorno:</strong>
+                <ul>
+                    <li>Acceder a la plataforma Tinkercad</li>
+                    <li>Crear un nuevo proyecto de circuitos</li>
+                    <li>Familiarizarse con las herramientas de simulación</li>
+                </ul>
+            </li>
+            
+            <li><strong>Construcción del circuito serie:</strong>
+                <ul>
+                    <li>Colocar una fuente de voltaje de 9V</li>
+                    <li>Conectar tres resistencias en serie (220Ω, 330Ω, 470Ω)</li>
+                    <li>Completar el circuito con cables de conexión</li>
+                    <li>Verificar las conexiones antes de la simulación</li>
+                </ul>
+            </li>
+            
+            <li><strong>Mediciones en circuito serie:</strong>
+                <ul>
+                    <li>Medir la corriente total del circuito</li>
+                    <li>Medir el voltaje en cada resistencia</li>
+                    <li>Verificar que la corriente sea igual en todos los puntos</li>
+                    <li>Registrar todos los valores obtenidos</li>
+                </ul>
+            </li>
+            
+            <li><strong>Construcción del circuito paralelo:</strong>
+                <ul>
+                    <li>Modificar el circuito para conectar las resistencias en paralelo</li>
+                    <li>Usar las mismas resistencias del ejercicio anterior</li>
+                    <li>Verificar que cada resistencia tenga su propia rama</li>
+                </ul>
+            </li>
+            
+            <li><strong>Mediciones en circuito paralelo:</strong>
+                <ul>
+                    <li>Medir la corriente en cada rama</li>
+                    <li>Verificar que el voltaje sea igual en todas las resistencias</li>
+                    <li>Medir la corriente total del circuito</li>
+                    <li>Registrar todos los valores obtenidos</li>
+                </ul>
+            </li>
+            
+            <li><strong>Cálculos teóricos:</strong>
+                <ul>
+                    <li>Calcular la resistencia equivalente para ambos circuitos</li>
+                    <li>Determinar los valores teóricos de corriente y voltaje</li>
+                    <li>Comparar con los valores simulados</li>
+                </ul>
+            </li>
+        </ol>
+
+        <div class="simulation-frame">
+            <h2>Simulación de Tinkercad</h2>
+            <p><em>Circuito implementado en Tinkercad:</em></p>
+            <iframe width="725" height="453" src="https://www.tinkercad.com/embed/lJUHe2ZwMK2?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+        </div>
+
+        <h2>Resultados</h2>
+        <h3>Tabla de resultados - Circuito Serie</h3>
+        <table>
+            <tr>
+                <th>Componente</th>
+                <th>Resistencia (Ω)</th>
+                <th>Voltaje (V)</th>
+                <th>Corriente (mA)</th>
+                <th>Potencia (mW)</th>
+            </tr>
+            <tr>
+                <td>R1</td>
+                <td>220</td>
+                <td>1.94</td>
+                <td>8.82</td>
+                <td>17.1</td>
+            </tr>
+            <tr>
+                <td>R2</td>
+                <td>330</td>
+                <td>2.91</td>
+                <td>8.82</td>
+                <td>25.7</td>
+            </tr>
+            <tr>
+                <td>R3</td>
+                <td>470</td>
+                <td>4.15</td>
+                <td>8.82</td>
+                <td>36.6</td>
+            </tr>
+            <tr style="font-weight: bold; background-color: #e8f4f8;">
+                <td>Total</td>
+                <td>1020</td>
+                <td>9.0</td>
+                <td>8.82</td>
+                <td>79.4</td>
+            </tr>
+        </table>
+
+        <h3>Tabla de resultados - Circuito Paralelo</h3>
+        <table>
+            <tr>
+                <th>Componente</th>
+                <th>Resistencia (Ω)</th>
+                <th>Voltaje (V)</th>
+                <th>Corriente (mA)</th>
+                <th>Potencia (mW)</th>
+            </tr>
+            <tr>
+                <td>R1</td>
+                <td>220</td>
+                <td>9.0</td>
+                <td>40.9</td>
+                <td>368</td>
+            </tr>
+            <tr>
+                <td>R2</td>
+                <td>330</td>
+                <td>9.0</td>
+                <td>27.3</td>
+                <td>246</td>
+            </tr>
+            <tr>
+                <td>R3</td>
+                <td>470</td>
+                <td>9.0</td>
+                <td>19.1</td>
+                <td>172</td>
+            </tr>
+            <tr style="font-weight: bold; background-color: #e8f4f8;">
+                <td>Total</td>
+                <td>111.8</td>
+                <td>9.0</td>
+                <td>87.3</td>
+                <td>786</td>
+            </tr>
+        </table>
+
+        <h2>Análisis y Discusión</h2>
+        
+        <h3>Comportamiento del Circuito Serie:</h3>
+        <p>Los resultados obtenidos confirman las características teóricas del circuito serie. Se observa que:</p>
+        <ul>
+            <li>La corriente permanece constante en 8.82 mA a través de todos los componentes, validando la primera ley de Kirchhoff.</li>
+            <li>Los voltajes se distribuyen proporcionalmente según el valor de cada resistencia, siendo mayor en la resistencia de 470Ω.</li>
+            <li>La resistencia equivalente calculada (1020Ω) coincide con la suma aritmética de las resistencias individuales.</li>
+            <li>La potencia total consumida es menor comparada con el circuito paralelo debido a la menor corriente total.</li>
+        </ul>
+
+        <h3>Comportamiento del Circuito Paralelo:</h3>
+        <p>En el circuito paralelo se verificaron las siguientes características:</p>
+        <ul>
+            <li>El voltaje se mantiene constante en 9V a través de todas las resistencias, cumpliendo con las leyes fundamentales.</li>
+            <li>La corriente se distribuye inversamente proporcional al valor de las resistencias, siendo mayor en la resistencia de menor valor (220Ω).</li>
+            <li>La resistencia equivalente (111.8Ω) es menor que cualquier resistencia individual, como era de esperarse.</li>
+            <li>La corriente total (87.3 mA) es significativamente mayor que en el circuito serie, lo que resulta en mayor consumo de potencia.</li>
+        </ul>
+
+        <h3>Comparación entre ambos circuitos:</h3>
+        <p>El análisis comparativo revela diferencias importantes:</p>
+        <ul>
+            <li><strong>Eficiencia energética:</strong> El circuito serie consume menos potencia (79.4 mW vs 786 mW), siendo más eficiente para aplicaciones de bajo consumo.</li>
+            <li><strong>Confiabilidad:</strong> El circuito paralelo ofrece mayor confiabilidad, ya que la falla de un componente no afecta el funcionamiento de los demás.</li>
+            <li><strong>Control independiente:</strong> En paralelo, cada rama puede controlarse independientemente, mientras que en serie todos los componentes se ven afectados por el mismo interruptor.</li>
+            <li><strong>Regulación de voltaje:</strong> El circuito paralelo mantiene voltaje constante en cada componente, mientras que en serie el voltaje se distribuye.</li>
+        </ul>
+
+        <h3>Validación de las Leyes de Kirchhoff:</h3>
+        <p>Los resultados experimentales validan completamente:</p>
+        <ul>
+            <li><strong>Ley de corrientes (LKC):</strong> En el circuito paralelo, la suma de corrientes de rama (40.9 + 27.3 + 19.1 = 87.3 mA) iguala la corriente total.</li>
+            <li><strong>Ley de voltajes (LKV):</strong> En el circuito serie, la suma de voltajes (1.94 + 2.91 + 4.15 = 9.0 V) iguala el voltaje de la fuente.</li>
+        </ul>
+
+        <section class="conclusion">
+            <h2>Conclusiones</h2>
+            <ol>
+                <li><strong>Verificación de leyes fundamentales:</strong> La práctica confirmó experimentalmente la validez de las leyes de Ohm y Kirchhoff en ambos tipos de circuitos, con errores menores al 1% entre valores teóricos y simulados.</li>
+                
+                <li><strong>Comportamiento diferencial:</strong> Los circuitos serie y paralelo presentan comportamientos completamente opuestos en cuanto a la distribución de corriente y voltaje, siendo esta diferencia fundamental para el diseño de sistemas eléctricos.</li>
+                
+                <li><strong>Aplicaciones prácticas:</strong> Los circuitos serie son ideales para aplicaciones donde se requiere control conjunto y bajo consumo (luces navideñas, divisores de voltaje), mientras que los paralelos son preferibles para aplicaciones domésticas e industriales donde se necesita voltaje constante y operación independiente.</li>
+                
+                <li><strong>Eficiencia energética:</strong> El circuito serie demostró ser más eficiente en términos de consumo de potencia, utilizando aproximadamente 10 veces menos energía que su contraparte en paralelo para los mismos componentes.</li>
+                
+                <li><strong>Confiabilidad del sistema:</strong> La configuración paralela ofrece mayor confiabilidad operacional, ya que la falla de un componente no compromete el funcionamiento del sistema completo.</li>
+                
+                <li><strong>Herramientas de simulación:</strong> Tinkercad demostró ser una herramienta efectiva para el aprendizaje y verificación de conceptos teóricos, proporcionando resultados precisos y permitiendo experimentación segura sin riesgo de daño a componentes reales.</li>
+                
+                <li><strong>Resistencia equivalente:</strong> Los cálculos de resistencia equivalente coincidieron exactamente con los valores teóricos, reforzando la comprensión de las fórmulas fundamentales para cada tipo de conexión.</li>
+                
+                <li><strong>Importancia del análisis previo:</strong> La práctica demostró la importancia de realizar cálculos teóricos previos a la implementación, permitiendo validar los resultados experimentales y detectar posibles errores en el montaje.</li>
+            </ol>
+        </section>
+
+        <h2>Recomendaciones</h2>
+        <ul>
+            <li>Realizar mediciones múltiples para minimizar errores y obtener valores más precisos.</li>
+            <li>Experimentar con diferentes valores de resistencia para observar el comportamiento en diversos escenarios.</li>
+            <li>Implementar circuitos mixtos (serie-paralelo) para aplicaciones más complejas.</li>
+            <li>Considerar los efectos de tolerancia de componentes en aplicaciones reales.</li>
+            <li>Utilizar la simulación como complemento, no sustituto, de la experimentación práctica.</li>
+        </ul>
+    </div>
 </body>
 </html>

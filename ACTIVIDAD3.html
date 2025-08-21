@@ -1,118 +1,118 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tercer Deber - Sistemas de Conversión entre Bases</title>
+    <title>ACTIVIDAD 2 - Simulación de Circuitos</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            line-height: 1.6;
             margin: 20px;
-            background-color: #f0f0f0;
-            color: #333;
-            line-height: 1.5;
+            background-color: #f5f5f5;
         }
-        
         .container {
             max-width: 900px;
             margin: 0 auto;
-            background-color: white;
+            background: white;
             padding: 30px;
-            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
-        
-        h1 {
+        .header {
             text-align: center;
-            color: #2c3e50;
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-        
-        .subtitle {
-            text-align: center;
-            color: #666;
-            font-size: 16px;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
             margin-bottom: 30px;
         }
-        
-        h2 {
-            color: #2c3e50;
-            font-size: 18px;
-            margin-top: 25px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 5px;
+        .back-link {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            transition: background 0.3s;
         }
-        
-        h3 {
-            color: #34495e;
-            font-size: 16px;
-            margin-top: 20px;
+        .back-link:hover {
+            background: #2980b9;
+        }
+        h1 {
+            color: #2c3e50;
             margin-bottom: 10px;
         }
-        
-        p {
-            margin: 10px 0;
-            text-align: justify;
+        h2 {
+            color: #34495e;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin-top: 30px;
         }
-        
-        .theory-box {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 15px;
+        h3 {
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+        .objectives {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
             margin: 15px 0;
         }
-        
-        .example {
-            background-color: #e8f4f8;
-            border-left: 3px solid #3498db;
-            padding: 10px;
-            margin: 10px 0;
-            font-family: Courier New, monospace;
+        .materials {
+            background: #e8f5e8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
         }
-        
+        ul {
+            padding-left: 25px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .simulation-frame {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .formula {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #ffc107;
+            font-family: 'Courier New', monospace;
+        }
+        .conclusion {
+            background: #d1ecf1;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #17a2b8;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
         }
-        
         th, td {
-            border: 1px solid #666;
-            padding: 8px;
+            border: 1px solid #ddd;
+            padding: 12px;
             text-align: center;
         }
-        
         th {
-            background-color: #34495e;
+            background-color: #3498db;
             color: white;
-            font-weight: bold;
         }
-        
-        td {
-            background-color: #f9f9f9;
-        }
-        
-        .base-list {
-            list-style-type: disc;
-            margin-left: 20px;
-        }
-        
-        .base-list li {
-            margin: 5px 0;
-        }
-        
-        .steps {
-            margin-left: 20px;
-        }
-        
-        .steps li {
-            margin: 8px 0;
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <a href="index.html" class="back-link">← Volver</a>
         <h1>TERCER DEBER</h1>
         <p class="subtitle">SISTEMAS DE CONVERSIÓN ENTRE BASES</p>
 
@@ -135,8 +135,6 @@
                 Ejemplo: 1101₂ = 1×2³ + 1×2² + 0×2¹ + 1×2⁰ = 8 + 4 + 0 + 1 = 13₁₀
             </div>
         </div>
-
-        <div class="theory-box">
             <h3>2.2 Conversión de Decimal a Binario</h3>
             <p>Se divide el número decimal entre 2 sucesivamente y se toman los residuos en orden inverso.</p>
             <div class="example">

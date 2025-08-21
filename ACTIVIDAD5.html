@@ -3,25 +3,334 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Actividad Tinkercad</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>ACTIVIDAD 5</title>
   <style>
-    h2, h3, h4, h5 {
-        margin-top: 1em;
-        margin-bottom: 0.5em;
-    } 
+    body.actividadtikercad {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+    }
+    
+    .contenedor {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #3498db;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 10px;
+      margin-top: 2em;
+      font-size: 1.8em;
+    }
+
+    h3 {
+      color: #e74c3c;
+      margin-top: 1.5em;
+      font-size: 1.4em;
+    }
+
+    h4 {
+      color: #27ae60;
+      margin-top: 1.2em;
+    }
+
+    .objetivo-box {
+      background: #ecf0f1;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 15px 0;
+      border-left: 5px solid #3498db;
+    }
+
+    .codigo-container {
+      background: #2c3e50;
+      color: #ecf0f1;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+      overflow-x: auto;
+      border: 2px solid #34495e;
+    }
+
+    .codigo-container pre {
+      margin: 0;
+      white-space: pre-wrap;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .simulacion-frame {
+      text-align: center;
+      margin: 30px 0;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      border: 2px dashed #3498db;
+    }
+
+    .componentes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .componente-card {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      border-left: 4px solid #e74c3c;
+    }
+
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .specs-table th {
+      background: #3498db;
+      color: white;
+      padding: 12px;
+      text-align: left;
+    }
+
+    .specs-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #ecf0f1;
+    }
+
+    .specs-table tr:hover {
+      background: #f8f9fa;
+    }
+
+    .conexiones-box {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 15px 0;
+    }
+
+    .resultado-box {
+      background: #d4edda;
+      border: 1px solid #c3e6cb;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border-left: 5px solid #28a745;
+    }
+
+    .volver-link {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .volver-link:hover {
+      background: #2980b9;
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .contenedor {
+        padding: 15px;
+        margin: 10px;
+      }
+      
+      h1 {
+        font-size: 2em;
+      }
+      
+      h2 {
+        font-size: 1.5em;
+      }
+    }
   </style>
 </head>
-<body class="actividadtikercad">
+<body class="actividad 5">
 
-  <div class="contenedor">
-    <h1>ACTIVIDAD TINKERCAD </h1>
-    <h2>Utilizar una unica función para encender y apagar el led y la alarma</h2>
-    Ejercicio: Encender un foco si la distancia es mayor a 100cm si es menor encender una alarma
-    <br>
-    <br>
-<iframe width="725" height="453" src="https://www.tinkercad.com/embed/26LCUm5C3mV?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+<a href="index.html" class="volver-link">← Volver</a>
 
+<div class="contenedor">
+  <h1>ACTIVIDAD 5 </h1>
+  
+  <div class="objetivo-box">
+    <h2>Descripción del Proyecto</h2>
+    <p><strong>Objetivo:</strong> Utilizar una única función para encender y apagar el LED y la alarma según la distancia medida.</p>
+    <p><strong>Funcionamiento:</strong> Encender un foco si la distancia es mayor a 100cm, si es menor encender una alarma.</p>
   </div>
+
+  <div class="simulacion-frame">
+    <h3>Simulación tinkercad</h3>
+    <iframe width="725" height="453" src="https://www.tinkercad.com/embed/26LCUm5C3mV?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+    <p><em>Haz clic en "Iniciar simulación" y prueba moviendo el objeto virtual cerca y lejos del sensor</em></p>
+  </div>
+
+  <h2>Componentes Utilizados</h2>
+  <div class="componentes-grid">
+    <div class="componente-card">
+      <h4>Arduino Uno</h4>
+      <p>Microcontrolador principal que procesa las señales y controla los actuadores</p>
+    </div>
+    <div class="componente-card">
+      <h4>Sensor HC-SR04</h4>
+      <p>Sensor ultrasónico que mide distancias de 2cm a 400cm usando ondas sonoras</p>
+    </div>
+    <div class="componente-card">
+      <h4>LED</h4>
+      <p>Indicador luminoso que se enciende cuando el objeto está lejos (>100cm)</p>
+    </div>
+    <div class="componente-card">
+      <h4>Buzzer</h4>
+      <p>Alarma sonora que se activa cuando el objeto está cerca (≤100cm)</p>
+    </div>
+  </div>
+
+  <h2>Tabla de Conexiones</h2>
+  <table class="specs-table">
+    <thead>
+      <tr>
+        <th>Componente</th>
+        <th>Pin del Componente</th>
+        <th>Pin de Arduino</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="4">Sensor HC-SR04</td>
+        <td>VCC</td>
+        <td>5V</td>
+        <td>Alimentación positiva</td>
+      </tr>
+      <tr>
+        <td>GND</td>
+        <td>GND</td>
+        <td>Tierra/masa</td>
+      </tr>
+      <tr>
+        <td>Trig</td>
+        <td>Pin 7</td>
+        <td>Envío de señal ultrasónica</td>
+      </tr>
+      <tr>
+        <td>Echo</td>
+        <td>Pin 6</td>
+        <td>Recepción de eco</td>
+      </tr>
+      <tr>
+        <td rowspan="2">LED</td>
+        <td>Ánodo (+)</td>
+        <td>Pin 13</td>
+        <td>Con resistencia 220Ω</td>
+      </tr>
+      <tr>
+        <td>Cátodo (-)</td>
+        <td>GND</td>
+        <td>A tierra</td>
+      </tr>
+      <tr>
+        <td rowspan="2">Buzzer</td>
+        <td>Pin positivo</td>
+        <td>Pin 12</td>
+        <td>Señal de control</td>
+      </tr>
+      <tr>
+        <td>Pin negativo</td>
+        <td>GND</td>
+        <td>A tierra</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Código Arduino</h2>
+  
+  <div class="conexiones-box">
+    <h3>Función Principal del Código</h3>
+    <p>El código utiliza <strong>una sola función</strong> llamada <code>controlarSistema()</code> que:</p>
+    <ul>
+      <li>Recibe la distancia medida como parámetro</li>
+      <li>Evalúa si es mayor o menor a 100cm</li>
+      <li>Controla LED y buzzer según la condición</li>
+      <li>Muestra el estado en el monitor serie</li>
+    </ul>
+  </div>
+
+
+
+  <h2>Cómo Funciona</h2>
+  
+  <h3>1️. Medición de Distancia</h3>
+  <p>El sensor HC-SR04 envía ondas ultrasónicas que rebotan en los objetos. El tiempo que tardan en regresar se convierte en distancia usando la fórmula de velocidad del sonido.</p>
+
+  <h3>2️. Función de Control</h3>
+  <div class="resultado-box">
+    <h4>La magia ocurre en <code>controlarSistema()</code></h4>
+    <ul>
+      <li><strong>Si distancia > 100cm:</strong> LED ON, Buzzer OFF</li>
+      <li><strong>Si distancia ≤ 100cm:</strong> LED OFF, Buzzer ON</li>
+    </ul>
+    <p>Una sola función maneja ambos dispositivos de forma eficiente</p>
+  </div>
+
+  <h3>3️. Monitoreo en Tiempo Real</h3>
+  <p>El monitor serie muestra las lecturas de distancia y el estado actual del sistema, facilitando la depuración y verificación.</p>
+
+  <h2>Instrucciones de Uso</h2>
+  <ol>
+    <li><strong>Abre Tinkercad:</strong> Ve al enlace de la simulación arriba</li>
+    <li><strong>Inicia la simulación:</strong> Haz clic en "Iniciar simulación"</li>
+    <li><strong>Prueba el sensor:</strong> Mueve el círculo azul (objeto) cerca y lejos del sensor</li>
+    <li><strong>Observa:</strong> LED se enciende cuando está lejos, alarma cuando está cerca</li>
+    <li><strong>Monitor serie:</strong> Ve las lecturas en tiempo real</li>
+  </ol>
+
+  <h2>Resultados Esperados</h2>
+  <div class="resultado-box">
+    <h4>El sistema funcionará así:</h4>
+    <ul>
+      <li><strong>Objeto lejos (>100cm):</strong> LED encendido, sin alarma</li>
+      <li><strong>Objeto cerca (≤100cm):</strong> Alarma sonando, LED apagado</li>
+      <li><strong>Monitor serie:</strong> Mostrará distancias y estados</li>
+      <li><strong>Respuesta:</strong> Cambios instantáneos cada 0.5 segundos</li>
+    </ul>
+  </div>
+
+
 </body>
 </html>
