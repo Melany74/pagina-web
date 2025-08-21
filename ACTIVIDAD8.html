@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACTIVIDAD 8 - Sistema de Inicio de Sesión con Arduino</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .nav-link:hover {
+            background: #45a049;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #34495e;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin-top: 30px;
+        }
+        
+        h3 {
+            color: #2980b9;
+            margin-top: 25px;
+        }
+        
+        .description-box {
+            background: #ecf0f1;
+            border-left: 4px solid #e74c3c;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .simulation-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        iframe {
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #ffc107;
+            margin: 15px 0;
+        }
+        
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .component-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #17a2b8;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ecf0f1;
+            text-align: center;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="nav-link">← Volver</a>
+        
+        <h1>ACTIVIDAD 8: Sistema de Inicio de Sesión con Arduino</h1>
+        
+        <div class="description-box">
+            <h3>Descripción del Proyecto</h3>
+            <p><strong>Crear un sistema de inicio de sesión donde:</strong></p>
+            <ul>
+                <li>Si la contraseña es correcta: mostrar "CORRECTO" en el LCD y encender un LED verde</li>
+                <li>Si la contraseña es incorrecta: activar una alarma (buzzer) y mostrar "INCORRECTO" en el LCD</li>
+            </ul>
+        </div>
+
+        <h2>1. OBJETIVOS</h2>
+        
+        <h3>1.1 Objetivo General</h3>
+        <p>Desarrollar e implementar un sistema de control de acceso basado en Arduino que valide contraseñas mediante un teclado matricial, proporcionando retroalimentación visual y auditiva según la autenticación del usuario.</p>
+        
+        <h3>1.2 Objetivos Específicos</h3>
+        <ol>
+            <li>Programar un microcontrolador Arduino para el procesamiento y validación de contraseñas ingresadas por teclado matricial.</li>
+            <li>Implementar un sistema de retroalimentación visual mediante pantalla LCD 16x2 para mostrar mensajes de estado.</li>
+            <li>Configurar indicadores LED para señalización visual del estado de autenticación (acceso autorizado/denegado).</li>
+            <li>Integrar un sistema de alarma sonora mediante buzzer para alertas de seguridad en caso de acceso no autorizado.</li>
+            <li>Simular y validar el funcionamiento del sistema utilizando la plataforma Tinkercad para verificar la lógica de programación.</li>
+        </ol>
+
+        <h2>2. MARCO TEÓRICO</h2>
+        
+        <h3>2.1 Microcontrolador Arduino</h3>
+        <p>Arduino es una plataforma de desarrollo de hardware y software libre basada en microcontroladores. Utiliza un lenguaje de programación similar a C++ y permite la creación de proyectos interactivos mediante la conexión de sensores, actuadores y otros componentes electrónicos.</p>
+        
+        <h3>2.2 Componentes del Sistema</h3>
+        <div class="components-grid">
+            <div class="component-card">
+                <h4>Teclado Matricial 4x4</h4>
+                <p>Dispositivo de entrada que permite al usuario ingresar datos numéricos y alfabéticos. Funciona mediante un sistema de filas y columnas que se activan al presionar las teclas.</p>
+            </div>
+            
+            <div class="component-card">
+                <h4>Pantalla LCD 16x2</h4>
+                <p>Display de cristal líquido capaz de mostrar 32 caracteres distribuidos en 2 filas de 16 caracteres cada una. Utiliza el protocolo I2C para comunicación con el Arduino.</p>
+            </div>
+            
+            <div class="component-card">
+                <h4>LED (Diodo Emisor de Luz)</h4>
+                <p>Componente semiconductor que emite luz cuando circula corriente eléctrica a través de él. Se utiliza como indicador visual del estado del sistema.</p>
+            </div>
+            
+            <div class="component-card">
+                <h4>Buzzer Piezoeléctrico</h4>
+                <p>Dispositivo electroacústico que genera sonido mediante la vibración de un material piezoeléctrico. Se emplea como sistema de alarma audible.</p>
+            </div>
+        </div>
+        
+        <h3>2.3 Sistemas de Control de Acceso</h3>
+        <p>Los sistemas de control de acceso son mecanismos de seguridad que regulan quién puede acceder a recursos específicos. En el contexto de sistemas embebidos, estos sistemas validan credenciales (como contraseñas) y ejecutan acciones basadas en el resultado de la autenticación.</p>
+        
+        <div class="highlight">
+            <h4>Principios de Funcionamiento:</h4>
+            <ul>
+                <li><strong>Autenticación:</strong> Verificación de la identidad del usuario</li>
+                <li><strong>Autorización:</strong> Determinación de permisos de acceso</li>
+                <li><strong>Auditoría:</strong> Registro de intentos de acceso</li>
+                <li><strong>Retroalimentación:</strong> Comunicación del resultado al usuario</li>
+            </ul>
+        </div>
+
+        <h2>3. SIMULACIÓN EN TINKERCAD</h2>
+        
+        <h3>3.1 ¿Qué es Tinkercad?</h3>
+        <p>Tinkercad es una plataforma web gratuita desarrollada por Autodesk que permite el diseño, simulación y programación de circuitos electrónicos de forma virtual. Incluye una amplia biblioteca de componentes electrónicos y permite la programación de microcontroladores mediante bloques visuales o código tradicional.</p>
+        
+        <h3>3.2 Ventajas de la Simulación</h3>
+        <ul>
+            <li><strong>Prototipado rápido:</strong> Permite probar diseños sin componentes físicos</li>
+            <li><strong>Depuración eficiente:</strong> Facilita la identificación y corrección de errores</li>
+            <li><strong>Experimentación segura:</strong> Evita daños a componentes reales por conexiones incorrectas</li>
+            <li><strong>Accesibilidad:</strong> No requiere hardware físico para el aprendizaje</li>
+            <li><strong>Visualización clara:</strong> Muestra el comportamiento del circuito en tiempo real</li>
+        </ul>
+        
+        <div class="simulation-container">
+            <h3>Simulación del Sistema de Login</h3>
+            <iframe width="725" height="453" src="https://www.tinkercad.com/embed/2MBYo5dGnPp?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+        </div>
+
+        <h2>4. FUNCIONAMIENTO DEL SISTEMA</h2>
+        
+        <h3>4.1 Algoritmo de Funcionamiento</h3>
+        <ol>
+            <li><strong>Inicialización:</strong> El sistema se inicia mostrando un mensaje de bienvenida en el LCD</li>
+            <li><strong>Entrada de datos:</strong> El usuario ingresa la contraseña usando el teclado matricial</li>
+            <li><strong>Procesamiento:</strong> Arduino compara la contraseña ingresada con la almacenada</li>
+            <li><strong>Validación positiva:</strong> Si coinciden, se muestra "CORRECTO" y se enciende el LED verde</li>
+            <li><strong>Validación negativa:</strong> Si no coinciden, se muestra "INCORRECTO" y se activa la alarma</li>
+            <li><strong>Reset:</strong> Después de un tiempo determinado, el sistema vuelve al estado inicial</li>
+        </ol>
+        
+        <h3>4.2 Estados del Sistema</h3>
+        <div class="highlight">
+            <p><strong>Estado de Espera:</strong> LCD muestra "Ingrese Password", sistema listo para recibir entrada</p>
+            <p><strong>Estado de Ingreso:</strong> Usuario escribiendo contraseña, caracteres mostrados como asteriscos</p>
+            <p><strong>Estado de Validación:</strong> Sistema procesando y comparando contraseña</p>
+            <p><strong>Estado de Éxito:</strong> Acceso autorizado, LED verde encendido, mensaje "CORRECTO"</p>
+            <p><strong>Estado de Error:</strong> Acceso denegado, alarma sonando, mensaje "INCORRECTO"</p>
+        </div>
+
+        <h2>5. CONCLUSIONES</h2>
+        
+        <h3>5.1 Logros Alcanzados</h3>
+        <ul>
+            <li>Se implementó exitosamente un sistema de control de acceso funcional utilizando componentes básicos de Arduino.</li>
+            <li>La integración del teclado matricial 4x4 permitió una interfaz de usuario intuitiva para el ingreso de contraseñas.</li>
+            <li>El sistema de retroalimentación dual (visual y auditiva) proporciona una experiencia de usuario clara y efectiva.</li>
+            <li>La simulación en Tinkercad demostró ser una herramienta valiosa para el desarrollo y validación del proyecto antes de la implementación física.</li>
+        </ul>
+        
+        <h3>5.2 Aprendizajes Técnicos</h3>
+        <ul>
+            <li><strong>Programación de microcontroladores:</strong> Se adquirieron conocimientos sobre el manejo de entradas digitales, control de displays LCD y gestión de estados en Arduino.</li>
+            <li><strong>Interfaz de usuario:</strong> Se comprendió la importancia de proporcionar retroalimentación clara y inmediata al usuario en sistemas interactivos.</li>
+            <li><strong>Sistemas de seguridad:</strong> Se exploraron conceptos básicos de autenticación y control de acceso en sistemas embebidos.</li>
+            <li><strong>Integración de componentes:</strong> Se desarrolló experiencia en la conexión y programación de múltiples componentes trabajando en conjunto.</li>
+        </ul>
+        
+        <h3>5.3 Aplicaciones Potenciales</h3>
+        <p>Este proyecto sienta las bases para sistemas más complejos como:</p>
+        <ul>
+            <li>Cerraduras electrónicas para hogares y oficinas</li>
+            <li>Sistemas de control de acceso a laboratorios o áreas restringidas</li>
+            <li>Cajas fuertes digitales</li>
+            <li>Sistemas de seguridad vehicular</li>
+            <li>Control de acceso a equipos industriales</li>
+        </ul>
+        
+        <h3>5.4 Mejoras Futuras</h3>
+        <ul>
+            <li><strong>Múltiples usuarios:</strong> Implementar un sistema que soporte varias contraseñas válidas</li>
+            <li><strong>Registro de intentos:</strong> Almacenar historial de accesos exitosos y fallidos</li>
+            <li><strong>Temporización de bloqueo:</strong> Bloquear el sistema temporalmente tras varios intentos fallidos</li>
+            <li><strong>Comunicación inalámbrica:</strong> Enviar notificaciones de acceso via WiFi o Bluetooth</li>
+            <li><strong>Encriptación:</strong> Implementar algoritmos de cifrado para mayor seguridad</li>
+        </ul>
+        
+        <h3>5.5 Reflexión Final</h3>
+        <p>El desarrollo de este sistema de inicio de sesión con Arduino ha demostrado cómo los conceptos básicos de programación y electrónica pueden combinarse para crear soluciones prácticas de seguridad. La experiencia obtenida mediante la simulación en Tinkercad ha sido fundamental para comprender el comportamiento del sistema antes de su implementación física, destacando la importancia de las herramientas de simulación en el proceso de desarrollo de sistemas embebidos.</p>
+    
+        </div>
+    </div>
+</body>
+</html>
