@@ -1,14 +1,553 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quinto deber</title>
+    <title>ACTIVIDAD 4 - Control de LEDs con Bucles</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+        }
+
+        .back-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #e9ecef;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .course-info {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 6px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin: 35px 0 20px 0;
+            padding: 15px 0;
+            border-bottom: 3px solid #667eea;
+            position: relative;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.3rem;
+            margin: 25px 0 15px 0;
+            padding-left: 15px;
+            border-left: 4px solid #3498db;
+        }
+
+        h4 {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+        }
+
+        p {
+            margin: 15px 0;
+            text-align: justify;
+            font-size: 1rem;
+        }
+
+        .objectives-section {
+            background: linear-gradient(135deg, #e8f5e8 0%, #d4f1d4 100%);
+            border: 2px solid #27ae60;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 8px 20px rgba(39, 174, 96, 0.15);
+        }
+
+        .theory-box {
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            border: 1px solid #3498db;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.1);
+        }
+
+        .theory-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+            border-left: 5px solid #e74c3c;
+        }
+
+        .code-comment {
+            color: #95a5a6;
+            font-style: italic;
+        }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .material-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border: 1px solid #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .material-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .procedure-steps {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+
+        .procedure-steps li {
+            counter-increment: step-counter;
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border-radius: 12px;
+            border-left: 5px solid #f39c12;
+            position: relative;
+            box-shadow: 0 3px 10px rgba(243, 156, 18, 0.2);
+        }
+
+        .procedure-steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: -18px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #f39c12;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .simulation-frame {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .comparison-table td {
+            background-color: #f9f9f9;
+        }
+
+        .comparison-table tr:nth-child(even) td {
+            background-color: #f1f3f4;
+        }
+
+        .comparison-table tr:hover td {
+            background-color: #e8f4f8;
+            transform: scale(1.01);
+            transition: all 0.3s ease;
+        }
+
+        .analysis-box {
+            background: linear-gradient(135deg, #e8f5e8 0%, #d4f1d4 100%);
+            border: 2px solid #27ae60;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 10px 20px rgba(39, 174, 96, 0.15);
+        }
+
+        .conclusion-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border: 2px solid #667eea;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .circuit-diagram {
+            background: white;
+            border: 2px solid #34495e;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .flowchart-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border: 2px solid #f39c12;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 8px 20px rgba(243, 156, 18, 0.15);
+        }
+
+        ul {
+            padding-left: 25px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #ffe6e6 0%, #ffcccc 100%);
+            border-left: 5px solid #e74c3c;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .materials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .simulation-frame iframe {
+                width: 100%;
+                height: 300px;
+            }
+        }
+    </style>
 </head>
-<body> 
-    <h2>7 leds utilizando el buble while y for <br>
-    
-    </h2>
-<iframe width="725" height="453" src="https://www.tinkercad.com/embed/eNzN1qH6Utb?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
-</body>
-</html>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Volver</a>
+        
+        <div class="header">
+            <h1>ACTIVIDAD 4</h1>
+            <p class="subtitle">Control de 7 LEDs utilizando bucles WHILE y FOR</p>   
+        </div>
+
+        <div class="objectives-section">
+            <h2>Objetivos</h2>
+            
+            <h3>Objetivo General:</h3>
+            <p>Implementar y comparar el uso de estructuras de control repetitivas (bucles while y for) para controlar secuencias de encendido y apagado de múltiples LEDs en una plataforma Arduino, desarrollando habilidades de programación y comprensión de automatización de procesos.</p>
+            
+            <h3>Objetivos Específicos:</h3>
+            <ul>
+                <li>Diseñar y construir un circuito con 7 LEDs conectados a pines digitales de Arduino.</li>
+                <li>Programar secuencias de LEDs utilizando bucles while y for de manera eficiente.</li>
+                <li>Comparar el rendimiento y legibilidad del código entre ambos tipos de bucles.</li>
+                <li>Implementar diferentes patrones de encendido (secuencial, alterno, aleatorio).</li>
+                <li>Analizar el consumo de recursos y tiempo de ejecución de cada implementación.</li>
+                <li>Desarrollar técnicas de depuración y optimización de código.</li>
+                <li>Aplicar buenas prácticas de programación en sistemas embebidos.</li>
+            </ul>
+        </div>
+
+        <h2>Marco Teórico</h2>
+
+        <div class="theory-box">
+            <h3>Estructuras de Control Repetitivas</h3>
+            <p>Las estructuras de control repetitivas o bucles son fundamentales en programación para ejecutar un bloque de código múltiples veces de manera eficiente. En Arduino, los bucles más utilizados son:</p>
+            
+            <h4>1. Bucle FOR</h4>
+            <p>El bucle <code>for</code> es ideal cuando se conoce de antemano el número exacto de iteraciones. Su sintaxis es compacta y permite inicialización, condición y actualización en una sola línea.</p>
+            
+            <div class="code-block">
+for (inicialización; condición; actualización) {
+    <span class="code-comment">// Código a ejecutar en cada iteración</span>
+    instrucciones;
+}
+
+<span class="code-comment">// Ejemplo práctico:</span>
+for (int i = 0; i < 7; i++) {
+    digitalWrite(ledPins[i], HIGH);
+    delay(200);
+    digitalWrite(ledPins[i], LOW);
+}
+            </div>
+            
+            <h4>2. Bucle WHILE</h4>
+            <p>El bucle <code>while</code> es más flexible y se ejecuta mientras la condición sea verdadera. Es útil cuando el número de iteraciones depende de condiciones dinámicas.</p>
+            
+            <div class="code-block">
+while (condición) {
+    <span class="code-comment">// Código a ejecutar mientras la condición sea verdadera</span>
+    instrucciones;
+    <span class="code-comment">// Importante: modificar la variable de control</span>
+}
+
+<span class="code-comment">// Ejemplo práctico:</span>
+int i = 0;
+while (i < 7) {
+    digitalWrite(ledPins[i], HIGH);
+    delay(200);
+    digitalWrite(ledPins[i], LOW);
+    i++; <span class="code-comment">// Actualización manual del contador</span>
+}
+            </div>
+        </div>
+
+        <div class="theory-box">
+            <h3>LEDs y Resistencias Limitadoras</h3>
+            <p>Los LEDs (Light Emitting Diodes) son semiconductores que emiten luz cuando son atravesados por corriente eléctrica. Para su correcto funcionamiento necesitan:</p>
+            
+            <ul>
+                <li><strong>Voltaje directo (Vf):</strong> Típicamente 1.8V - 3.3V según el color</li>
+                <li><strong>Corriente directa (If):</strong> Generalmente 20mA para LEDs estándar</li>
+                <li><strong>Resistencia limitadora:</strong> Para proteger el LED del exceso de corriente</li>
+            </ul>
+            
+            <div class="highlight">
+                <h4>Cálculo de Resistencia Limitadora:</h4>
+                <p><strong>R = (Vcc - Vf) / If</strong></p>
+                <p>Para Arduino (5V) con LED rojo (Vf=2V, If=20mA):</p>
+                <p>R = (5V - 2V) / 0.02A = 150Ω (usar 220Ω comercial)</p>
+            </div>
+        </div>
+
+        <h2>Materiales y Componentes</h2>
+        
+        <div class="materials-grid">
+            <div class="material-card">
+                <h4>🔌 Hardware</h4>
+                <ul>
+                    <li>Arduino Uno R3</li>
+                    <li>Protoboard 830 puntos</li>
+                    <li>7 LEDs (colores variados)</li>
+                    <li>7 Resistencias 220Ω</li>
+                    <li>Cables jumper macho-macho</li>
+                    <li>Cable USB A-B</li>
+                </ul>
+            </div>
+            
+            <div class="material-card">
+                <h4>💻 Software</h4>
+                <ul>
+                    <li>Arduino IDE 2.0+</li>
+                    <li>Tinkercad Circuits</li>
+                    <li>Navegador web actualizado</li>
+                    <li>Drivers USB para Arduino</li>
+                </ul>
+            </div>
+            
+            <div class="material-card">
+                <h4>📋 Herramientas</h4>
+                <ul>
+                    <li>Multímetro digital</li>
+                    <li>Pelador de cables</li>
+                    <li>Alicates pequeños</li>
+                    <li>Documentación técnica</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Diseño del Circuito</h2>
+        
+        <div class="circuit-diagram">
+            <h3>Esquema de Conexiones</h3>
+            <p><strong>Configuración de Pines:</strong></p>
+            <ul style="text-align: left; display: inline-block;">
+                <li>LED 1 → Pin Digital 2 → Resistencia 220Ω → GND</li>
+                <li>LED 2 → Pin Digital 3 → Resistencia 220Ω → GND</li>
+                <li>LED 3 → Pin Digital 4 → Resistencia 220Ω → GND</li>
+                <li>LED 4 → Pin Digital 5 → Resistencia 220Ω → GND</li>
+                <li>LED 5 → Pin Digital 6 → Resistencia 220Ω → GND</li>
+                <li>LED 6 → Pin Digital 7 → Resistencia 220Ω → GND</li>
+                <li>LED 7 → Pin Digital 8 → Resistencia 220Ω → GND</li>
+            </ul>
+        </div>
+
+        <h2>Procedimiento de Implementación</h2>
+        
+        <ol class="procedure-steps">
+            <li>
+                <strong>Preparación del entorno de desarrollo</strong>
+                <p>Instalar Arduino IDE, configurar drivers y verificar comunicación con la placa. Crear un nuevo proyecto y configurar las librerías necesarias.</p>
+            </li>
+            
+            <li>
+                <strong>Montaje del circuito físico</strong>
+                <p>Conectar los 7 LEDs en los pines digitales 2-8, cada uno con su resistencia limitadora de 220Ω. Verificar polaridad y conexiones antes de energizar.</p>
+            </li>
+            
+            <li>
+                <strong>Programación básica de configuración</strong>
+                <p>Escribir el código de inicialización, declarar el arreglo de pines y configurar todos los pines como OUTPUT en la función setup().</p>
+            </li>
+            
+            <li>
+                <strong>Implementación con bucle FOR</strong>
+                <p>Crear funciones que utilicen bucles for para diferentes patrones: secuencial, reverso, alterno y simultáneo.</p>
+            </li>
+            
+            <li>
+                <strong>Implementación con bucle WHILE</strong>
+                <p>Desarrollar las mismas funciones utilizando bucles while, manteniendo la misma funcionalidad pero diferente estructura de control.</p>
+            </li>
+            
+            <li>
+                <strong>Pruebas y depuración</strong>
+                <p>Compilar, cargar el programa y verificar el funcionamiento. Usar monitor serie para depuración y ajustar tiempos de delay según sea necesario.</p>
+            </li>
+            
+            <li>
+                <strong>Optimización y documentación</strong>
+                <p>Optimizar el código para eficiencia, agregar comentarios detallados y crear documentación técnica del proyecto.</p>
+            </li>
+        </ol>
+        <div class="simulation-frame">
+            <h2>Simulación en Tinkercad</h2>
+            <p><em>Circuito interactivo - Prueba diferentes patrones de LEDs:</em></p>
+            <iframe width="725" height="453" src="https://www.tinkercad.com/embed/eNzN1qH6Utb?editbtn=1" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+            <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">
+                <strong>Instrucciones:</strong> Haz clic en "Start Simulation" para ver los LEDs en acción. 
+                El monitor serie muestra información detallada de cada operación.
+            </p>
+        </div>
+
+        <h2>Conclusión</h2>
+
+        <table class="comparison-table">
+            <tr>
+            La implementación de estructuras de control repetitivas en Arduino, mediante el uso de los bucles for y while, permitió comprender de manera práctica cómo optimizar la programación de secuencias de LEDs y aplicar conceptos de automatización en sistemas embebidos. El bucle for demostró ser más adecuado en situaciones donde el número de iteraciones está definido, ofreciendo mayor legibilidad y simplicidad en el código. Por su parte, el bucle while brindó mayor flexibilidad cuando las condiciones de ejecución dependen de factores variables.
